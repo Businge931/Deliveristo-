@@ -1,0 +1,63 @@
+.select-breed {
+  color: var(--white-1);
+  border-radius: 25px;
+  padding: 20px;
+  text-transform: capitalize;
+  transition: var(--transition-1);
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.select-breed h2 {
+  color: var(--white-1);
+  padding: 10px 0;
+}
+.select-breed h2 span {
+  color: var(--orange-yellow-crayola);
+  display: inline;
+}
+.image-container {
+  height: 500px;
+  width: 600px;
+  margin: 20px auto;
+}
+
+.image-container img {
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+}
+.sub-breed-heading {
+  color: var(--white-1);
+}
+
+.sub-breed-name {
+  color: var(--orange-yellow-crayola);
+  text-transform: capitalize;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+.sub-breed-images {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sub-breed-image {
+  height: 200px;
+  width: 200px;
+}
+.sub-breed-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transition: var(--transition-1);
+}
+
+.sub-breed-image img:hover {
+  transform: scale(1.1);
+}

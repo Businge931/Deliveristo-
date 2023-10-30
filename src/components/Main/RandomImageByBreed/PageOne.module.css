@@ -1,0 +1,45 @@
+.pageOne {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* justify-content: center; */
+}
+.heading {
+  color: var(--white-1);
+}
+.pageOne button {
+  border: 1px solid var(--jet);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-1);
+}
+.pageOne button:hover {
+  border: 1px solid var(--vegas-gold);
+}
+
+.image_container {
+  height: 600px;
+  width: auto;
+  margin: 20px auto;
+  border-radius: 20px;
+}
+.image_container img {
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.breedName {
+  color: var(--white-2);
+  padding: 20px 0;
+}
+.breedName span {
+  display: inline;
+  color: var(--vegas-gold);
+  padding-left: 10px;
+  text-transform: uppercase;
+}
