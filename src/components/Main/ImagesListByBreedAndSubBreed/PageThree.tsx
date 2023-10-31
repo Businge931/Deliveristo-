@@ -12,6 +12,7 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
   const [selectedBreed, setSelectedBreed] = useState<string>("");
   const [selectedSubBreeds, setSelectedSubBreeds] = useState<string[]>([]);
   const [randomBreedImage, setRandomBreedImage] = useState<string>("");
+  const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
   const [subBreedImages, setSubBreedImages] = useState<{
     [key: string]: string[];
   }>({});
@@ -70,6 +71,7 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
   useEffect(() => {
     if (randomBreedImageData) {
       setRandomBreedImage(randomBreedImageData.message as string);
+      setIsImageLoading(true)
     }
   }, [randomBreedImageData]);
 
@@ -95,20 +97,16 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
       </button>
       {selectedBreed && (
         <div className={styles.images}>
-          <h2 id="random_image_title">
+          <h2>
             Random Image of: <span>{selectedBreed} breed</span>
           </h2>
           <div className={styles["image-container"]}>
-            {randomImageLoading ? (
+            {isImageLoading ? (
               <Loader />
             ) : randomImageError ? (
               <Error error="Image not found" />
             ) : (
-              <img
-                id="random_image"
-                src={randomBreedImage}
-                alt={selectedBreed}
-              />
+              <img src={randomBreedImage} alt={selectedBreed} />
             )}
           </div>
           {selectedSubBreeds.length > 0 && (
@@ -127,25 +125,7 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
                               className={styles["sub-breed-image"]}
                               key={index}
                             >
-                              <img
-                                onLoad={() => {
-                                  // Image loaded, remove the loading text
-                                  const loadingText = document.getElementById(
-                                    `loading_${index}`
-                                  );
-                                  if (loadingText) {
-                                    loadingText.style.display = "none";
-                                  }
-                                }}
-                                src={image}
-                                alt={subBreed}
-                              />
-                              <p
-                                id={`loading_${index}`}
-                                style={{ color: "white", textAlign: "center" }}
-                              >
-                                Loading...
-                              </p>
+                              <img src={image} alt={subBreed} />
                             </div>
                           ))}
                       </div>
