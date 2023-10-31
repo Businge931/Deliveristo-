@@ -127,7 +127,25 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
                               className={styles["sub-breed-image"]}
                               key={index}
                             >
-                              <img src={image} alt={subBreed} />
+                              <img
+                                onLoad={() => {
+                                  // Image loaded, remove the loading text
+                                  const loadingText = document.getElementById(
+                                    `loading_${index}`
+                                  );
+                                  if (loadingText) {
+                                    loadingText.style.display = "none";
+                                  }
+                                }}
+                                src={image}
+                                alt={subBreed}
+                              />
+                              <p
+                                id={`loading_${index}`}
+                                style={{ color: "white", textAlign: "center" }}
+                              >
+                                Loading...
+                              </p>
                             </div>
                           ))}
                       </div>
