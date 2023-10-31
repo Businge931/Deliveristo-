@@ -24,12 +24,15 @@ const PageFour: React.FC<PageFourProps> = ({ content }) => {
     fetchData: fetchBreeds,
   } = useFetch("https://dog.ceo/api/breeds/list/all");
 
-  const { data: randomBreedImageData, fetchData: fetchRandomBreedImage } =
-    useFetch(
-      selectedBreed
-        ? `https://dog.ceo/api/breed/${selectedBreed}/images/random`
-        : ""
-    );
+  const {
+    data: randomBreedImageData,
+    isLoading: randomBreemdImageLoading,
+    fetchData: fetchRandomBreedImage,
+  } = useFetch(
+    selectedBreed
+      ? `https://dog.ceo/api/breed/${selectedBreed}/images/random`
+      : ""
+  );
 
   const {
     data: subBreedsData,
@@ -118,7 +121,11 @@ const PageFour: React.FC<PageFourProps> = ({ content }) => {
       {selectedBreed && (
         <div className={styles.images}>
           <div className={styles["image-container"]}>
-            <img id="image" src={randomBreedImage} alt={selectedBreed} />
+            {randomBreemdImageLoading ? (
+              <Loader />
+            ) : (
+              <img id="image" src={randomBreedImage} alt={selectedBreed} />
+            )}
           </div>
           {selectedSubBreeds.length > 0 && (
             <div>
@@ -141,7 +148,25 @@ const PageFour: React.FC<PageFourProps> = ({ content }) => {
                               className={styles["sub-breed-image"]}
                               key={index}
                             >
-                              <img src={image} alt={subBreed} />
+                              <img
+                                onLoad={() => {
+                                  // Image loaded, remove the loading text
+                                  const loadingText = document.getElementById(
+                                    `loading_${index}`
+                                  );
+                                  if (loadingText) {
+                                    loadingText.style.display = "none";
+                                  }
+                                }}
+                                src={image}
+                                alt={subBreed}
+                              />
+                              <p
+                                id={`loading_${index}`}
+                                style={{ color: "white", textAlign: "center" }}
+                              >
+                                Loading...
+                              </p>
                             </div>
                           ))}
                       </div>
