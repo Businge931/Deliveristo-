@@ -24,6 +24,7 @@ const PageOne: React.FC<PageOneProps> = ({ content }) => {
         const parts = data.message.split("/");
         const breedIndex = parts.indexOf("breeds");
         const breedName = parts[breedIndex + 1];
+        console.log("Breed Name:", breedName);
         setBreedName(breedName);
         setBreed(data.message);
       } else if (Array.isArray(data.message)) {
@@ -41,7 +42,7 @@ const PageOne: React.FC<PageOneProps> = ({ content }) => {
       <h1 className="heading">{content}</h1>
       {!error && (
         <h4 className={styles.breedName}>
-          Breed Name:<span>{breedName}</span>
+          Breed Name:<span data-testid="bread_name">{breedName}</span>
         </h4>
       )}
       <div className={`${styles.pageOne} `}>
@@ -59,7 +60,11 @@ const PageOne: React.FC<PageOneProps> = ({ content }) => {
         ) : (
           <figure className={styles.image_container}>
             {typeof breed === "string" && (
-              <img src={breed} alt="Random dog by breed" />
+              <img
+                className="dog-image"
+                src={breed}
+                alt="Random dog by breed"
+              />
             )}
           </figure>
         )}

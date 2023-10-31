@@ -110,7 +110,7 @@ const PageFour: React.FC<PageFourProps> = ({ content }) => {
           />
         )}
         {selectedBreed && (
-          <h2>
+          <h2 id="image_title">
             Image of: <span>{selectedBreed}</span>
           </h2>
         )}
@@ -118,7 +118,7 @@ const PageFour: React.FC<PageFourProps> = ({ content }) => {
       {selectedBreed && (
         <div className={styles.images}>
           <div className={styles["image-container"]}>
-            <img src={randomBreedImage} alt={selectedBreed} />
+            <img id="image" src={randomBreedImage} alt={selectedBreed} />
           </div>
           {selectedSubBreeds.length > 0 && (
             <div>
