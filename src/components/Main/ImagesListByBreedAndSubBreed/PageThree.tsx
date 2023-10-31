@@ -95,7 +95,7 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
       </button>
       {selectedBreed && (
         <div className={styles.images}>
-          <h2>
+          <h2 id="random_image_title">
             Random Image of: <span>{selectedBreed} breed</span>
           </h2>
           <div className={styles["image-container"]}>
@@ -104,7 +104,11 @@ const PageThree: React.FC<PageThreeProps> = ({ content }) => {
             ) : randomImageError ? (
               <Error error="Image not found" />
             ) : (
-              <img src={randomBreedImage} alt={selectedBreed} />
+              <img
+                id="random_image"
+                src={randomBreedImage}
+                alt={selectedBreed}
+              />
             )}
           </div>
           {selectedSubBreeds.length > 0 && (
