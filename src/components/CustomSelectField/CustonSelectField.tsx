@@ -24,7 +24,11 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   return (
     <div>
       <div className={styles.dropdown}>
-        <div onClick={toggleDropdown} className={styles["dropdown-btn"]}>
+        <div
+          data-testid="images_dropdown"
+          onClick={toggleDropdown}
+          className={styles["dropdown-btn"]}
+        >
           {selected}
           <span>
             {isActive ? (
