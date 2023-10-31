@@ -1,46 +1,91 @@
-# Getting Started with Create React App
+DOG BREEED IMAGE DISPLAY APP DOCUMENTATION
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Introduction
+The Dog Breed Image Display App is a React-Typescript application designed to display images of dog breeds and their sub-breeds. This documentation will guide you through the app's features and components.
 
-## Available Scripts
 
-In the project directory, you can run:
+1. Getting Started
+Prerequisites
+Before using the Dog Breed Image Display App, make sure you have the following prerequisites in place:
 
-### `npm start`
+Node.js and npm (Node Package Manager) installed.
+A code editor (e.g., Visual Studio Code) for development.
+Basic knowledge of React and TypeScript.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Installation
+To install and run the app locally, follow these steps:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Clone the repository from GitHub:
+https://github.com/Businge931/Deliveristo-
+Navigate to the project directory:
+cd deliveristo
+Install the required dependencies:
+npm install
+Start the development server:
+npm start
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Dog Breed Image Display App Documentation
+Introduction
+The Dog Breed Image Display App is a React-Typescript application designed to display images of dog breeds and their sub-breeds. 
+This documentation will guide you through the app's features and components.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. App Structure
+Components
+The app consists of four main components:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Random Image by Breed
+Images List by Breed
+Random Image by Breed and Sub-Breed
+Images List by Breed and Sub-Breed
+Sidebar
+The app features a sidebar with four buttons, each corresponding to one of the four main components. Clicking a button renders the respective component on the main screen.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Functionality Overview
+Components that display images randomly have a button to generate random breed images.
+Other components with lists use a select input field to choose a breed, triggering a backend call to fetch and display random images.
 
-### `npm run eject`
+3. Using the App
+This section will provide detailed instructions on how to use each component within the app.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Random Image by Breed
+To display a random image of a specific breed:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Click the "Random Image by Breed" button on the sidebar.
+Click the "Generate Random Image" button within the component.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Images List by Breed
+To view a list of images for a specific breed:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Click the "Images List by Breed" button on the sidebar.
+Select a breed from the dropdown.
+The app will make a backend call and display a list of images for the selected breed.
 
-## Learn More
+Random Image by Breed and Sub-Breed
+To display a random image of a specific sub-breed within a breed:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Click the "Random Image by Breed and Sub-Breed" button on the sidebar.
+Click the "Generate Random Image" button within the component.
+Images List by Breed and Sub-Breed
+To view a list of images for a specific sub-breed within a breed:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Click the "Images List by Breed and Sub-Breed" button on the sidebar.
+Select a breed and sub-breed from the respective dropdowns.
+The app will make a backend call and display a list of images for the selected sub-breed.
+
+4. Development and Customization
+This section provides information for developers who want to extend or customize the app.
+
+Folder Structure
+The project structure is made up of the components folder in the src which contains all the component files, then a utils folder with custom hooks and all constants such as types/interfaces.
+
+API Integration
+Interfacing with the api is through a custon useFetch hook which handles all the generic responses from the backend. It is used in all the components that require data fetching.
+Styling
+For styling, I used the CSS modules for each component and added all global styles in the index.css file.
+Additional Features
+I added error handling and loading state for a smooth and better user experience. I also wrote end-to-end tests for all the flow of the application.
+
+5. Conclusion
+   Generally, the app acts a dashboard for displaying images of dog breeds as well as thier corresponding sub breed images in their respective categories.
