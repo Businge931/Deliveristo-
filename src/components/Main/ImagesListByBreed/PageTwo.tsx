@@ -1,9 +1,7 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./PageTwo.module.css";
 import CustomSelect from "../../CustomSelectField/CustonSelectField";
 import useFetch from "./../../../utils/hooks/useFetch";
-import Loader from "../../Loader/Loader";
-import Error from "../../Error/Error";
 
 interface PageTwoProps {
   content: React.ReactNode;
@@ -11,33 +9,23 @@ interface PageTwoProps {
 
 const PageTwo: React.FC<PageTwoProps> = ({ content }) => {
   const [selectedBreed, setSelectedBreed] = useState<string>("");
-  const [displayCount, setDisplayCount] = useState<number>(8);
 
+  // Create a useFetch instance for fetching breed images
   const breedImagesFetch = useFetch(
     selectedBreed ? `https://dog.ceo/api/breed/${selectedBreed}/images` : ""
   );
 
-  const images = breedImagesFetch.data?.message;
-
+  // Create a useFetch instance for fetching all breeds
   const allBreedsFetch = useFetch("https://dog.ceo/api/breeds/list/all");
 
   const handleBreedChange = (selectedBreed: string) => {
     setSelectedBreed(selectedBreed);
-    breedImagesFetch.fetchData();
+    breedImagesFetch.fetchData(); // Trigger the image fetch
   };
 
   useEffect(() => {
-    allBreedsFetch.fetchData();
+    allBreedsFetch.fetchData(); // Trigger the fetch for all breeds
   }, [allBreedsFetch]);
-
-  const optionsList = useMemo(() => {
-    return allBreedsFetch.isLoading
-      ? []
-      : Object.keys(allBreedsFetch.data?.message || {}).map((breed, index) => ({
-          id: index,
-          name: breed,
-        }));
-  }, [allBreedsFetch.isLoading, allBreedsFetch.data]);
 
   return (
     <div>
@@ -46,33 +34,52 @@ const PageTwo: React.FC<PageTwoProps> = ({ content }) => {
       <div className={styles.pageTwo}>
         <CustomSelect
           defaultText="Select a breed"
-          optionsList={optionsList}
+          optionsList={
+            allBreedsFetch.isLoading
+              ? []
+              : Object.keys(allBreedsFetch.data?.message || {}).map(
+                  (breed, index) => ({
+                    id: index,
+                    name: breed,
+                  })
+                )
+          }
           onSelect={handleBreedChange}
         />
 
         <ul className={styles["dog-list"]}>
           {breedImagesFetch.isLoading ? (
-            <Loader />
+            <p>Loading images...</p>
           ) : breedImagesFetch.error ? (
-            <Error error={breedImagesFetch.error} />
+            <p>Error: {breedImagesFetch.error}</p>
           ) : (
-            Array.isArray(images) &&
-            images.slice(0, displayCount).map((img: string, index: number) => (
+            Array.isArray(breedImagesFetch.data?.message) &&
+            breedImagesFetch.data?.message.map((img: string, index: number) => (
               <li key={index}>
-                <img src={img} alt="dog breed" />
+                <img
+                  onLoad={() => {
+                    // Image loaded, remove the loading text
+                    const loadingText = document.getElementById(
+                      `loading_${index}`
+                    );
+                    if (loadingText) {
+                      loadingText.style.display = "none";
+                    }
+                  }}
+                  src={img}
+                  alt="dog breed"
+                />
+                <p
+                  id={`loading_${index}`}
+                  style={{ color: "white", textAlign: "center" }}
+                >
+                  Loading...
+                </p>
               </li>
             ))
           )}
         </ul>
       </div>
-      {Array.isArray(images) && images.length > displayCount && (
-        <button
-          style={{ color: "white" }}
-          onClick={() => setDisplayCount(displayCount + 12)}
-        >
-          Show more
-        </button>
-      )}
     </div>
   );
 };
