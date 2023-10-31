@@ -28,6 +28,7 @@ const App: React.FC = () => {
           {sidebarButtonContent.map((btnContent, index) => (
             <li
               key={btnContent}
+              id={`list_content_${index}`}
               className={
                 index === selectedIndex
                   ? `${styles.active}`
